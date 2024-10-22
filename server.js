@@ -9,9 +9,11 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-console.log(process.env.MONGO_URL)
+console.log(process.env.MONGO_URI)
 
-let url = process.env.MONGO_URL ;
+const {MONGO_URI} = process.env
+
+let url = MONGO_URI ;
 mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -23,7 +25,7 @@ mongoose.connect(url, {
     console.error('Erro ao conectar com o MongoDB:', error);
   });
   
-let mongodb = process.env.MONGODB_URI || url;
+let mongodb = MONGO_URI || url;
 mongoose.connect(mongodb);
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
