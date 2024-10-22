@@ -9,23 +9,23 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-console.log(process.env.MONGO_URI)
+console.log(process.env.MONGO_URI_LOCAL)
 
-const {MONGO_URI} = process.env
+const {MONGO_URI, MONGO_URI_LOCAL} = process.env
 
-let url = MONGO_URI ;
-mongoose.connect(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    ssl: true, // Habilita SSL
-    tlsAllowInvalidCertificates: true // Ignora certificados inválidos (somente em dev)
-  }).then(() => {
-    console.log('Conectado ao MongoDB com sucesso!');
-  }).catch((error) => {
-    console.error('Erro ao conectar com o MongoDB:', error);
-  });
+let url = MONGO_URI_LOCAL ;
+// mongoose.connect(url, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     ssl: true,
+//     tlsAllowInvalidCertificates: true 
+//   }).then(() => {
+//     console.log('Conectado ao MongoDB com sucesso!');
+//   }).catch((error) => {
+//     console.error('Erro ao conectar com o MongoDB:', error);
+//   });
   
-let mongodb = MONGO_URI || url;
+let mongodb = MONGO_URI_LOCAL || url;
 mongoose.connect(mongodb);
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
